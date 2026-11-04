@@ -1,6 +1,6 @@
    # Environment (FP1)
 
-   Recorded on: 11/2/26
+   Recorded on: 03/11/2026
    Packages installed with apt from Ubuntu's archive.
 
    | Item | Version |

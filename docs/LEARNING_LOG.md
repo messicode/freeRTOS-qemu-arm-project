@@ -9,5 +9,12 @@
    - ~ is my personal home (/home/<uname>), / is root and /mnt/c is where windows lives in my ubuntu image
    - absolute paths start from root, relative paths are relative to the pwd.
    
+   ## Lesson 0.3: Toolchain
+   - Host is WSl (Linux-Ubuntu Distro) and Target is ARM Cortex-M3
+   - A Cross-Compiler is needed so we can compile machine code on an x86 machine but for an ARM based machine.
 
-    ## Lesson 0.3: Toolchain
+   ## Lesson 0.4: Git
+   Repository is in a remote location in cloud, staging area is where you kee your changes and working directory is where you're currently working on.
+   
+
+
