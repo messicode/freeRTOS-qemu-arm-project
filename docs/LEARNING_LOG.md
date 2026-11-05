@@ -14,7 +14,8 @@
    - A Cross-Compiler is needed so we can compile machine code on an x86 machine but for an ARM based machine.
 
    ## Lesson 0.4: Git
-   Repository is in a remote location in cloud, staging area is where you kee your changes and working directory is where you're currently working on.
+   - Repository is the local .git folder, staging area is where you kee your changes and working directory is where you're currently working on.
+   - Three stages: modified, staged, committed
    
 
 
