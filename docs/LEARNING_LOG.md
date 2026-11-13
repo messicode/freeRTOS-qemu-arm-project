@@ -14,8 +14,11 @@
    - A Cross-Compiler is needed so we can compile machine code on an x86 machine but for an ARM based machine.
 
    ## Lesson 0.4: Git
-   - Repository is the local .git folder, staging area is where you kee your changes and working directory is where you're currently working on.
+   - Repository is the local .git folder, remote is a copy on github, staging area is where you keep your changes and working directory is where you're currently working on.
    - Three stages: modified, staged, committed
    
-
+   ## Lesson 0.5: QEMU
+   - What QEMU does NOT prove: For AN385, the remapping of the low 16K between ZBT SSRAM1 and block RAM is unimplemented.
+   -  Machine model is the whole model(that gets simulated ) of the hardware with its memory, architecture, and the overall motherboard layout.
+   - mps2-an385 has Cortex M3 CPU;PSRAM is 16MB with base as 0x21000000, Somewhere else in the document and not in memory map, I found UART0 BA=0x40004000
 
