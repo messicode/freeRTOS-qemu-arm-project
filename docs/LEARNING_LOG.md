@@ -18,7 +18,7 @@
    - Three stages: modified, staged, committed
    
    ## Lesson 0.5: QEMU
-   - What QEMU does NOT prove: For AN385, the remapping of the low 16K between ZBT SSRAM1 and block RAM is unimplemented.
+   - What QEMU does NOT prove: For AN385, the remapping of the low 16K between ZBT SSRAM1 and block RAM is unimplemented. The lowest 16K can map to either ZBT SSRAM1 or the block RAM. QEMU always uses ZBT SSRAM1 and doesn’t implement the choice.
    -  Machine model is the whole model(that gets simulated ) of the hardware with its memory, architecture, and the overall motherboard layout.
    - mps2-an385 has Cortex M3 CPU;PSRAM is 16MB with base as 0x21000000, Somewhere else in the document and not in memory map, I found UART0 BA=0x40004000
-
+   - The source code file (mostly .c) is what actually runs, so it’s the ground truth for QEMU. It’s not necessarily the truth for a real board, which we will remember in the README.
