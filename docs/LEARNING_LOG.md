@@ -24,4 +24,9 @@
    - Machine model is the whole model(that gets simulated ) of the hardware with its memory, architecture, and the overall motherboard layout.
    - mps2-an385 has Cortex M3 CPU;PSRAM is 16MB with base as 0x21000000, Somewhere else in the document and not in memory map, I found UART0 base_address=0x40004000; info mtree gave all the memory mapping for this qemu machine model including the code memory which has base address = 0x000000000... also called mps.ssram1. Although its a ram for qemu boards, this was used as code memory as this is the address range from where Program Counter and Stack Pointer load on hardware reset. 
    - The source code file (mostly .c) is what actually runs, so it’s the ground truth for QEMU. It’s not necessarily the truth for a real board, which we will remember in the README.
-   - 
+
+   ## Lesson 1.1: Mental Model
+   - On reset the hardware loads the word 0 into SP and word 1 into PC. Then it starts fetching instructions from PC and executing them. Word 1 last bit is 1 indicating Thumb code.
+   - Before the main.c program gets executed C expects: global variables into RAM, unitialized globals are zeroed, then main() is called.
+   - Stack is required to maintain function calls. Each call pushes its return address and their local variables. SP points to the stacks top. C needs this stack to call any functions.
+   - Vector Table is an array of 32 bit words at the start of memory. W0 holds the SP and W1 has the address of the code that runs intially ie. reset handler. Later words hold the exception and interrupt handlers addresses.
