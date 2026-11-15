@@ -27,6 +27,51 @@
 
    ## Lesson 1.1: Mental Model
    - On reset the hardware loads the word 0 into SP and word 1 into PC. Then it starts fetching instructions from PC and executing them. Word 1 last bit is 1 indicating Thumb code.
-   - Before the main.c program gets executed C expects: global variables into RAM, unitialized globals are zeroed, then main() is called.
+   - Before the main.c program gets executed C expects: initialized global variables are copied into RAM, unintialized globals are zeroed, then main() is called.
    - Stack is required to maintain function calls. Each call pushes its return address and their local variables. SP points to the stacks top. C needs this stack to call any functions.
    - Vector Table is an array of 32 bit words at the start of memory. W0 holds the SP and W1 has the address of the code that runs intially ie. reset handler. Later words hold the exception and interrupt handlers addresses.
+
+
+             ARM CORTEX-M3 MEMORY MAP
+          (Low address → High address)
+
+     ┌──────────────────────────────┐
+     │          NVIC / PPB          │
+     │          I/O                │
+     │  0xE0000000 - 0xE00FFFFF   │
+     ├──────────────────────────────┤
+     │                              │
+     │          UART                │
+     │          I/O                │
+     │  0x40004000 - 0x40004FFF   │
+     ├──────────────────────────────┤
+     │                              │
+     │          PSRAM               │
+     │          RAM                 │
+     │  0x21000000 - 0x21FFFFFF   │
+     │          16 MB               │
+     ├──────────────────────────────┤
+     │                              │
+     │          SSRAM23             │
+     │          RAM                 │
+     │  0x20000000 - 0x203FFFFF   │
+     │          4 MB                │
+     ├──────────────────────────────┤
+     │                              │
+     │          BLOCKRAM            │
+     │          RAM                 │
+     │  0x01000000 - 0x01003FFF   │
+     │          16 KB               │
+     ├──────────────────────────────┤
+     │                              │
+     │          SSRAM1              │
+     │          RAM                 │
+     │  0x00000000 - 0x003FFFFF   │
+     │          4 MB                │
+     │                              │
+     │  Potential firmware/code    │
+     └──────────────────────────────┘
+
+             LOWEST ADDRESS
+                0x00000000
+   - If we modify the RAM size to 64K from 4M, the _estack symbol becomes 20010000 (Checked by changing ram size too)
