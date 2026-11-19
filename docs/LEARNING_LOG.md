@@ -77,7 +77,16 @@
 
    ## Lesson 2.1: First bootable image
    - vector table is where the CPU starts, the w0 and w1 are loaded from the vector table into the SP and PC. So vector table holds the _estack and reset handler symbols. 
-   - Linker script tells the compiler about the memory layout, the estack/stack starting point and the entry point. It also defines the different sections our code would need and the entry point. 
+   - Linker script tells the linker about the memory layout(just the floor plan), the estack/stack starting point and the entry point. It also defines the different sections our code would need and the entry point. The linker follows this floor plan.
    - If we modify the RAM size to 64K from 4M, the _estack symbol becomes 20010000 (Checked by changing ram size too)
    - Understanding the command used: Without -nostdlib, gcc would also link the C library and the standard startup code. That code expects an operating system, and it brings its own entry point. Without -ffreestanding, the compiler may assume library functions behave in standard ways and optimize around them. Neither is wanted when there is no OS.
    - 'make run' first checks if therea need to build the elf files. Then it starts QEMU and (for now) runs the CPU in an infinite loop. The loop is silent as it has nothing to print/do. Since there was no lockup, that signals the CPU didnt hard-fault.
+   ## Lesson 2.2: GDB
+   - -S tells QEMU to free CPU before 1st instruction, -s opens server on port 1234.
+   - On observing I found: 
+   x/2wx 0 gives:
+   0x0 <vector_table>:     0x20400000      0x00000009
+   And  x/3i $pc gives:
+   => 0x8 <Reset_Handler>: push    {r7}
+   0xa <Reset_Handler+2>:       add     r7, sp, #0
+   0xc <Reset_Handler+4>:       nop

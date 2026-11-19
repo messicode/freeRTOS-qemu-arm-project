@@ -16,4 +16,8 @@ run: build/firmware.elf
 clean:
 	rm -rf build
 
-.PHONY: run clean
+# Debugger; -S tells QEMU to freeze the CPU before the first instruction. -s opens the server on port 1234.
+debug: build/firmware.elf
+	qemu-system-arm -M mps2-an385 -nographic -kernel build/firmware.elf -S -s
+
+.PHONY: run clean debug
